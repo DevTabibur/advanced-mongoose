@@ -9,15 +9,21 @@ export const getUserServices = async (): Promise<IUser[]> => {
 }
 
 export const createUserToDB = async (payload: IUser): Promise<IUser> => {
-    // create instance for new user from interface
-    const user = new User(payload)
+    // creating a new User, we are using instance methods
+    const user = new User(payload) // User => class user -> instance
     await user.save();
-    // must use return keyword
+    console.log('fullName', user.fullName());
     return user;
 }
 
 export const getAUserByID = async (payload: string): Promise<IUser | null> => {
     console.log('payload', { id: payload });
-    const user = await User.findOne({ id: payload }, { name: 1 ,contactNo: 1 })
+    const user = await User.findOne({ id: payload }, { name: 1, contactNo: 1 })  // eikhane name and contactNo ke field filtering kore oi data gula passi... and tader value 1 deya mane -> it's value is true
     return user;
+}
+
+
+export const getAdminUsersFromDB = async (payload: string): Promise<IUser | null> => {
+
+
 }
